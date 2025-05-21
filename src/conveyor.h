@@ -1,13 +1,26 @@
 #ifndef CONVEYOR_H
 #define CONVEYOR_H
 
-#include <stdint.h>
+#include <map>
 
 #include "pos.h"
 #include "item.h"
 #include "size.h"
 #include "enums.h"
 
+class Conveyor {
+private:
+    Pos pos;
+    byte level;
+    byte rotation;
+    Conveyor* next;
+    std::map<Item*, FloatPos> items;
+    Size size;
+public:
+    Conveyor(Pos pos, int rotation, byte level, Size size);
+    ~Conveyor();
+    //TODO code constructor
+};
 
 typedef struct Conveyor {
     Pos pos;

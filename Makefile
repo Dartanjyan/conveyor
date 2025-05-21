@@ -1,13 +1,13 @@
-CC_LINUX = gcc
-CC_WIN = x86_64-w64-mingw32-gcc
+CXX_LINUX = g++
+CXX_WIN = x86_64-w64-mingw32-g++
 
 LDFLAGS = -lchipmunk -lm -lSDL2
 LDFLAGS_LINUX = $(LDFLAGS) -L/usr/local/lib
 LDFLAGS_WIN = $(LDFLAGS) -L3rdparty/SDL/install/lib -lmingw32 -lSDL2main -mwindows -L3rdparty/chipmunk/install/lib -lwinpthread
 
-CFLAGS = -O2
-CFLAGS_LINUX = $(CFLAGS) -I/usr/include/SDL2 -D_REENTRANT
-CFLAGS_WIN = $(CFLAGS) -I3rdparty/SDL/install/include -Dmain=SDL_main -I3rdparty/chipmunk/install/include
+CXXFLAGS = -O2
+CXXFLAGS_LINUX = $(CXXFLAGS) -I/usr/include/SDL2 -D_REENTRANT
+CXXFLAGS_WIN = $(CXXFLAGS) -I3rdparty/SDL/install/include -Dmain=SDL_main -I3rdparty/chipmunk/install/include
 
 SRC_DIR = src
 BUILD_DIR = build
@@ -18,8 +18,6 @@ OBJ_WIN = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o.w, $(SRC))
 BIN_NAME = conveyor
 TARGET_LINUX = $(BUILD_DIR)/$(BIN_NAME)
 TARGET_WIN = $(BUILD_DIR)/$(BIN_NAME).exe
-
-# SDL2_LINUX_LIB =
 
 linux: $(BUILD_DIR) $(TARGET_LINUX)
 #	tar -cJvf $(BUILD_DIR)/$(BIN_NAME).tar.xz $(TARGET_LINUX)
@@ -37,16 +35,16 @@ $(BUILD_DIR):
 	@mkdir -vp $@
 
 $(TARGET_LINUX): $(OBJ_LINUX)
-	$(CC_LINUX) $^ -o $@ $(LDFLAGS_LINUX)
+	$(CXX_LINUX) $^ -o $@ $(LDFLAGS_LINUX)
 
 $(TARGET_WIN): $(OBJ_WIN)
-	$(CC_WIN) $^ -o $@ $(LDFLAGS_WIN)
+	$(CXX_WIN) $^ -o $@ $(LDFLAGS_WIN)
 
 $(BUILD_DIR)/%.o.l: $(SRC_DIR)/%.c | $(BUILD_DIR)
-	$(CC_LINUX) $(CFLAGS_LINUX) -c $< -o $@
+	$(CXX_LINUX) $(CXXFLAGS_LINUX) -c $< -o $@
 
 $(BUILD_DIR)/%.o.w: $(SRC_DIR)/%.c | $(BUILD_DIR)
-	$(CC_WIN) $(CFLAGS_WIN) -c $< -o $@
+	$(CXX_WIN) $(CXXFLAGS_WIN) -c $< -o $@
 
 
 

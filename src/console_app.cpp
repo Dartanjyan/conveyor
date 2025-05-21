@@ -1,27 +1,19 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
 #include "console_app.h"
 #include "conveyor.h"
 #include "pos.h"
 #include "enums.h"
 #include "size.h"
 
-ConsoleApp *cgConsoleAppNew(char* name) {
-    struct ConsoleApp* app = (struct ConsoleApp*)malloc(sizeof(ConsoleApp));
-    if (app == NULL) {
-        return NULL;
-    }
-    app->name = name;
-    return app;
-}
+ConsoleApp::ConsoleApp() : name("Application") {}
 
-void cgConsoleAppFree(ConsoleApp *app)  {
-    free(app);
-}
+ConsoleApp::ConsoleApp(char* name): name(name) {}
 
-int cgConsoleAppRun(ConsoleApp *app) {
-    printf("\n\n\nWelcome to my application!\n\nApp name is \"%s\".\n\n", app->name);
-    printf("Creating a Conveyor.\n");
+~ConsoleApp::ConsoleApp() {}
+
+ConsoleApp::run() {
+    std::cout<<"\n\n\nWelcome to my application!\n\nApp name is \""<<name<<"\".\n\n";
+    std::cout<<"Creating a Conveyor.\n";
     
     Pos pos = {0, 0};
     Size size = {1, 1};
