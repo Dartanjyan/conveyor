@@ -22,7 +22,7 @@ TARGET_WIN = $(BUILD_DIR)/$(BIN_NAME).exe
 # SDL2_LINUX_LIB =
 
 linux: $(BUILD_DIR) $(TARGET_LINUX)
-	tar -cJvf $(BUILD_DIR)/$(BIN_NAME).tar.xz $(TARGET_LINUX)
+#	tar -cJvf $(BUILD_DIR)/$(BIN_NAME).tar.xz $(TARGET_LINUX)
 
 windows: $(BUILD_DIR) $(TARGET_WIN)
 	@cp -v 3rdparty/SDL/install/bin/SDL2.dll $(BUILD_DIR)

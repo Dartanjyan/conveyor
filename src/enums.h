@@ -2,10 +2,10 @@
 #define ENUMS_H
 
 enum {
-    DIR_NORTH,
-    DIR_WEST,
-    DIR_SOUTH,
-    DIR_EAST
+    ROT_NORTH,
+    ROT_WEST,
+    ROT_SOUTH,
+    ROT_EAST
 };
 
 #endif
