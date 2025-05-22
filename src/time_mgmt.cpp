@@ -1,5 +1,4 @@
 #include <time.h>
-// #include <errno.h>
 
 #include "time_mgmt.h"
 
@@ -25,3 +24,4 @@ void tick(float fps) {
 
     last_time = current_time;
 }
+

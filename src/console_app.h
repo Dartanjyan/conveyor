@@ -1,14 +1,14 @@
 #ifndef CONSOLE_APP_H
 #define CONSOLE_APP_H
 
+#include <string>
+
 class ConsoleApp {
-    char* name;
+    std::string name;
 public:
-    ConsoleApp();
-    ConsoleApp(char* name);
-    ~ConsoleApp();
+    ConsoleApp(std::string name = "Application");
 
     int run();
-}
+};
 
 #endif

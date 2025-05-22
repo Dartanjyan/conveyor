@@ -1,14 +1,16 @@
 #ifndef POS_H
 #define POS_H
 
-#include <stdint.h>
+class Pos {
+public:
+    int x, y;
+    Pos(int x=0, int y=0) : x(x), y(y) {}
+};
 
-typedef struct Pos {
-    uint64_t x, y;
-} Pos;
-
-typedef struct FloatPos {
-    float x, y;
-} FloatPos;
+class FloatPos {
+public:
+    double x, y;
+    FloatPos(double x=0, double y=0): x(x), y(y) {}
+};
 
 #endif

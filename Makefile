@@ -1,20 +1,20 @@
 CXX_LINUX = g++
 CXX_WIN = x86_64-w64-mingw32-g++
 
-LDFLAGS = -lchipmunk -lm -lSDL2
+LDFLAGS =
 LDFLAGS_LINUX = $(LDFLAGS) -L/usr/local/lib
-LDFLAGS_WIN = $(LDFLAGS) -L3rdparty/SDL/install/lib -lmingw32 -lSDL2main -mwindows -L3rdparty/chipmunk/install/lib -lwinpthread
+LDFLAGS_WIN = $(LDFLAGS) -lmingw32 -mwindows -L3rdparty/chipmunk/install/lib
 
 CXXFLAGS = -O2
-CXXFLAGS_LINUX = $(CXXFLAGS) -I/usr/include/SDL2 -D_REENTRANT
-CXXFLAGS_WIN = $(CXXFLAGS) -I3rdparty/SDL/install/include -Dmain=SDL_main -I3rdparty/chipmunk/install/include
+CXXFLAGS_LINUX = $(CXXFLAGS)
+CXXFLAGS_WIN = $(CXXFLAGS)
 
 SRC_DIR = src
 BUILD_DIR = build
-SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
 
-OBJ_LINUX = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o.l, $(SRC))
-OBJ_WIN = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o.w, $(SRC))
+OBJ_LINUX = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o.l, $(SRC))
+OBJ_WIN = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o.w, $(SRC))
 BIN_NAME = conveyor
 TARGET_LINUX = $(BUILD_DIR)/$(BIN_NAME)
 TARGET_WIN = $(BUILD_DIR)/$(BIN_NAME).exe
@@ -40,10 +40,10 @@ $(TARGET_LINUX): $(OBJ_LINUX)
 $(TARGET_WIN): $(OBJ_WIN)
 	$(CXX_WIN) $^ -o $@ $(LDFLAGS_WIN)
 
-$(BUILD_DIR)/%.o.l: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o.l: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 	$(CXX_LINUX) $(CXXFLAGS_LINUX) -c $< -o $@
 
-$(BUILD_DIR)/%.o.w: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o.w: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 	$(CXX_WIN) $(CXXFLAGS_WIN) -c $< -o $@
 
 

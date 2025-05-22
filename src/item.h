@@ -2,19 +2,15 @@
 #define ITEM_H
 
 #include "size.h"
-#include "pos.h"
 
-typedef struct Item {
+class Item {
+public:
     int id;
-    struct Size size;
-} Item;
+    Size size;
+    
+    Item() : id(1), size(Size(1, 1)) {}
+    Item(int id, Size size = Size(1, 1)) : id(id), size(size) {}
+    ~Item() {}
+};
 
-typedef struct ItemPosPair {
-    Item* item;
-
-    // Relative float x and y.
-    // On conveyor X and Y axis will be the same as screen X and Y if 
-    // conveyor looks towards to DIR_NORTH
-    FloatPos pos;
-} ItemPosPair;
 #endif
