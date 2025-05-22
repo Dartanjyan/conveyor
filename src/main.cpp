@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "console_app.h"
+#include "sfml_app.h"
 
 int main(int argc, char *argv[]) {
     bool gui = true;
@@ -27,7 +28,8 @@ int main(int argc, char *argv[]) {
         delete app;
     } else {
         std::cout << "Launching application in GUI mode...\n";
-        std::cout << "Na razie nie jest zrobione to więc kręć się jak chcesz\n";
+        SFMLApp app("The best game in the world");
+        result = app.run();
     }
 
     return result;

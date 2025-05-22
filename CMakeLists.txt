@@ -15,15 +15,17 @@ file(GLOB_RECURSE SRC_FILES "${SRC_DIR}/*.cpp")
 # Add executable
 add_executable(conveyor ${SRC_FILES})
 
-# Find SFML 3.0
 # Usage: add -DSFML_DIR=/path/to/your/sfml3/install if using custom build
 list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/3rdparty/sfml/install")
-find_package(SFML 3.0 COMPONENTS Graphics Window System REQUIRED)
-if(TARGET SFML::Graphics)
-    target_link_libraries(conveyor PRIVATE SFML::Graphics SFML::Window SFML::System)
-else()
-    message(FATAL_ERROR "Could not find SFML 3.0 libraries.")
-endif()
+find_package(SFML COMPONENTS graphics window system REQUIRED)
+
+target_link_libraries(conveyor PRIVATE sfml-graphics sfml-window sfml-system)
+
+#if(TARGET SFML::Graphics)
+#    target_link_libraries(conveyor PRIVATE SFML::Graphics SFML::Window SFML::System)
+#else()
+#    message(FATAL_ERROR "Could not find SFML libraries.")
+#endif()
 
 # Installation rules
 install(TARGETS conveyor RUNTIME DESTINATION bin)

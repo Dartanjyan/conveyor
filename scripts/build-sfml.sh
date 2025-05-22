@@ -17,7 +17,7 @@ BUILD_DIR="${SRC_DIR}/build"
 SFML_INSTALL="${SFML_DIR}/install"
 
 SFML_REPO="https://github.com/SFML/SFML.git"
-SFML_TAG="3.0.0"
+SFML_TAG="2.6.2"
 
 # Компиляторы по-умолчанию
 CC_LINUX="gcc"
@@ -27,6 +27,7 @@ CXX_WIN="x86_64-w64-mingw32-g++"
 
 # Опции CMake
 COMMON_CMAKE_FLAGS=(
+  "--fresh"
   "-DCMAKE_BUILD_TYPE=Release"
   "-DBUILD_SHARED_LIBS=ON"
   "-DSFML_BUILD_EXAMPLES=OFF"
@@ -56,10 +57,10 @@ cd "${BUILD_DIR}"
 
 # 3) Формируем флаги в зависимости от хоста
 if [[ "${HOST-}" == "Windows" ]]; then
-  echo ">>> Cross-compiling SFML 3.0 for Windows..."
+  echo ">>> Cross-compiling SFML ${SFML_TAG} for Windows..."
   CMAKE_FLAGS=("${COMMON_CMAKE_FLAGS[@]}" "${WINDOWS_CMAKE_FLAGS[@]}")
 else
-  echo ">>> Building SFML 3.0 for Linux..."
+  echo ">>> Building SFML ${SFML_TAG} for Linux..."
   CMAKE_FLAGS=("${COMMON_CMAKE_FLAGS[@]}")
 fi
 
@@ -71,6 +72,6 @@ cmake --build . --config Release -- -j$(nproc)
 cmake --install . --config Release
 
 echo
-echo "SFML 3.0 has been built and installed to:"
+echo "SFML ${SFML_TAG} has been built and installed to:"
 echo "  ${SFML_INSTALL}"
 
