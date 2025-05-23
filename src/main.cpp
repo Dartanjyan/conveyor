@@ -1,37 +1,16 @@
 #include <iostream>
+#include "ApplicationManager.h"
+#include "UI.h"
+#include "SDLApp.h"
 
-#include "console_app.h"
-#include "sfml_app.h"
+int main(int argc, char** argv) {
+    // TODO Create IGUI app (on SDL2)
+    auto gui_app = new SDLApp("Sdl works!!!!", 200, 200);
 
-int main(int argc, char *argv[]) {
-    bool gui = true;
-    for (int i = 1; i < argc; ++i) {
-        auto arg = static_cast<std::string>(argv[i]);
-        std::cout << "Got arg \""<<arg<<"\". ";
-        
-        if (arg == "--nogui") {
-            gui = false;
-            std::cout << "Set gui bool to "<<gui<<".\n";
-        }
-        else {
-            std::cout << "This does not mean anything.\n";
-        }
-    }
-    
-    std::cout<<"-----------------------------------\n\n";
+    // UI takes IGUI and ICLI in its constructor
+    std::unique_ptr<UI> ui = std::make_unique<UI>(gui_app, nullptr);
 
-    int result = 0;
-    if (gui == false) {
-        std::cout << "Launching application in CLI mode...\n";
-        ConsoleApp* app = new ConsoleApp("My application");
-        result = app->run();
-        delete app;
-    } else {
-        std::cout << "Launching application in GUI mode...\n";
-        SFMLApp app("The best game in the world");
-        result = app.run();
-    }
+    int result = ApplicationManager::Run(argc, argv, std::move(ui));
 
     return result;
 }
-
