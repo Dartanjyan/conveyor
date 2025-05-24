@@ -18,7 +18,7 @@ int SDLApp::Init() {
         SDL_WINDOWPOS_CENTERED,
         width,
         height,
-        SDL_WINDOW_SHOWN
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
     if (window == nullptr) {
         std::cout << "Couldn't open a window: " << SDL_GetError() << "\n";

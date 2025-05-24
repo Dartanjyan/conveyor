@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv) {
     // TODO Create IGUI app (on SDL2)
-    auto gui_app = new SDLApp("Sdl works!!!!", 200, 200);
+    auto gui_app = new SDLApp("Sdl works!!!!", 640, 480);
 
     // UI takes IGUI and ICLI in its constructor
     std::unique_ptr<UI> ui = std::make_unique<UI>(gui_app, nullptr);
