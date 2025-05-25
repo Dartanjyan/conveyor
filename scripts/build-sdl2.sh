@@ -1,14 +1,17 @@
 #!/bin/bash
 set -e
 
-HOST=x86_64-w64-mingw32
+HOST=Windows
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SDL_DIR="$(realpath ${SCRIPT_DIR}/..)/3rdparty/SDL"
 SRC_DIR="${SDL_DIR}/src"
 INSTALL_DIR="${SDL_DIR}/install"
 
-CONFIG_FLAGS="--prefix=$INSTALL_DIR"
+CONFIG_FLAGS="-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+if [[ $HOST != "Windows" ]] then
+    CONFIG_FLAGS="$CONFIG_FLAGS -DCMAKE_TOOLCHAIN_FILE=${SCRIPT_DIR}/../scripts/sdl2-mingw-toolchain.cmake"
+fi
 
 mkdir -pv $SDL_DIR
 
@@ -21,12 +24,12 @@ rm -rf build
 mkdir -v build
 cd build
 
-if [[ $HOST != "" ]] then
-    CONFIG_FLAGS="$CONFIG_FLAGS --host=$HOST"
-fi
+cmake .. \
+    $CONFIG_FLAGS
 
-../configure $CONFIG_FLAGS
+cmake --build .
+cmake --install .
 
-make
-make install
-
+rm -rf $SRC_DIR
+echo -------------------------------------------------------
+echo SDL library successfully installed to $INSTALL_DIR

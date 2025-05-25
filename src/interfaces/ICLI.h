@@ -6,7 +6,7 @@ public:
     virtual ~ICLI() = default;
 
     // Initialization
-    virtual void Init() = 0;
+    virtual int Init() = 0;
 
     // This function is responsible for running the CLI interface.
     virtual int Run() = 0;

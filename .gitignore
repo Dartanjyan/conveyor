@@ -1,6 +1,8 @@
 build
 3rdparty
 *.swp
+whole.txt
+.vscode
 
 # Prerequisites
 *.d

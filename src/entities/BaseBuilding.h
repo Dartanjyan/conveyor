@@ -2,17 +2,22 @@
 #define BASEBUILDING_H
 
 #include <vector>
-#include "size.h"
-#include "pos.h"
+#include "Size.h"
+#include "Transform.h"
+#include "Id.h"
 
 class BaseBuilding {
-    Pos pos;
+protected:
+    Transform transform;
     Size size;
+    Id id;
 public:
-    BaseBuilding(Pos pos, Size size) : pos(pos), size(size) {}
+    BaseBuilding(Transform transform, Size size) : transform(transform), size(size), id(Id("empty")) {}
+    BaseBuilding(Transform transform, Size size, Id id) : transform(transform), size(size), id(id) {}
 
-    Pos getPos() const { return pos; }
+    Transform getTransform() const { return transform; }
     Size getSize() const { return size; }
+    Id getId() const { return id; }
 };
 
 #endif
