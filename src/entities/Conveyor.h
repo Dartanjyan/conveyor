@@ -11,6 +11,8 @@
 class Conveyor: public BaseBuilding{
 private:
     uint8_t level;
+    // How far to move items on conveyor each tick
+    float movingSpeed = 0.1f;
     // Next conveyor
     Conveyor* next;
     // Map that keeps pointers to objects on the conveyor and their position
@@ -23,4 +25,6 @@ public:
     uint8_t getLevel() const { return level; }
     const Conveyor* getNextConveyor() const { return next; }
     std::map<Item*, Transform> getItems() const { return items; }
+
+    void Act() override;
 };

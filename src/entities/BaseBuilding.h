@@ -18,6 +18,8 @@ public:
     Transform getTransform() const { return transform; }
     Size getSize() const { return size; }
     Id getId() const { return id; }
+
+    void Act();
 };
 
 #endif

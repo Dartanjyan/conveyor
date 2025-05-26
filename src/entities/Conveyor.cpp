@@ -7,3 +7,7 @@ Conveyor::Conveyor(Transform transform, Size size, uint8_t level): BaseBuilding(
             break;
     }
 }
+
+void Conveyor::Act() {
+}
+
