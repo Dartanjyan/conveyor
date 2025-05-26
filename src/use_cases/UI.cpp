@@ -2,8 +2,6 @@
 
 UI::UI(IGUI *gui, ICLI *cli) : gui_(gui), cli_(cli) {}
 
-UI::~UI() {}
-
 int UI::Run(bool gui)
 {
     if (gui)

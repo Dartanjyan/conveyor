@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <iostream>
 #include <cstdint>
 
 #include "BaseBuilding.h"
@@ -26,5 +27,5 @@ public:
     const Conveyor* getNextConveyor() const { return next; }
     std::map<Item*, Transform> getItems() const { return items; }
 
-    void Act() override;
+    void Act();
 };

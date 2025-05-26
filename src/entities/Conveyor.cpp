@@ -9,5 +9,6 @@ Conveyor::Conveyor(Transform transform, Size size, uint8_t level): BaseBuilding(
 }
 
 void Conveyor::Act() {
+    std::cout<<"Conveyor: Act!\n";
 }
 
