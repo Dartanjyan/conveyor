@@ -1,9 +1,6 @@
+#include <iostream>
 #include <string>
 #include "SDLApp.h"
-
-SDLApp::SDLApp(std::string name, int width, int height) : name(name), width(width), height(height) {}
-
-SDLApp::~SDLApp() {}
 
 int SDLApp::Init() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
