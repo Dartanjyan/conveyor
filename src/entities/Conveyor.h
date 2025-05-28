@@ -22,6 +22,7 @@ private:
     std::map<Item*, Transform> items;
 public:
     Conveyor(Transform transform, Size size, uint8_t level);
+    ~Conveyor();
     
     uint8_t getLevel() const { return level; }
 

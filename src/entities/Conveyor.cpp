@@ -10,6 +10,12 @@ Conveyor::Conveyor(Transform transform, Size size, uint8_t level): BaseBuilding(
     }
 }
 
+Conveyor::~Conveyor() {
+    for (auto& itemPair : items) {
+        delete itemPair.first;
+    }
+}
+
 // Try to accept item Item, which comes to position relPos
 bool Conveyor::AcceptItem(Item* item, const Transform& relPos) {
     // Check conveyor dimensions

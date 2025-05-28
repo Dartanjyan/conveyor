@@ -6,9 +6,9 @@
 
 class Item {
     Id id;
-    Size size;
+    float size;
 public:
-    Item(Id id, Size size = Size(1, 1)) : id(id), size(size) {}
+    Item(Id id, float size = 0.1f) : id(id), size(size) {}
     
     Id getId() const { return id; }
     Size getSize() const { return size; }
