@@ -1,9 +1,11 @@
 CXX_LINUX = g++
-CXX_WIN = x86_64-w64-mingw32-g++
+CXX_WIN = x86_64-w64-mingw32-g++-posix
 
 LDFLAGS = -lm
 LDFLAGS_LINUX = $(LDFLAGS) -lSDL2 -L/usr/local/lib
-LDFLAGS_WIN = $(LDFLAGS) -L3rdparty/SDL/install/lib -lmingw32 -lSDL2main -lSDL2 -mwindows -lwinpthread
+# -mwindows
+# LDFLAGS_WIN = $(LDFLAGS) -L3rdparty/SDL/install/lib -lmingw32 -lSDL2main -lSDL2 -lwinpthread
+LDFLAGS_WIN = -static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic -lm -L3rdparty/SDL/install/lib -lmingw32 -lSDL2main -lSDL2 -lwinpthread
 
 CXXFLAGS = -O2 -Isrc/entities -Isrc/use_cases -Isrc/interfaces -Isrc/frameworks
 CXXFLAGS_LINUX = $(CXXFLAGS) -I/usr/include/SDL2 -D_REENTRANT
@@ -24,9 +26,9 @@ linux: $(BUILD_DIR) $(TARGET_LINUX)
 
 windows: $(BUILD_DIR) $(TARGET_WIN)
 	@cp -v 3rdparty/SDL/install/bin/SDL2.dll $(BUILD_DIR)
-	@bash -c "if [[ -f /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll ]]; then cp -v /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll $(BUILD_DIR); else cp -v /usr/x86_64-w64-mingw32/bin/libwinpthread-1.dll $(BUILD_DIR); fi"
-	@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libgcc_s_seh-1.dll $(BUILD_DIR)
-	@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libstdc++-6.dll $(BUILD_DIR)
+	#@bash -c "if [[ -f /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll ]]; then cp -v /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll $(BUILD_DIR); else cp -v /usr/x86_64-w64-mingw32/bin/libwinpthread-1.dll $(BUILD_DIR); fi"
+	#@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libgcc_s_seh-1.dll $(BUILD_DIR)
+	#@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libstdc++-6.dll $(BUILD_DIR)
 	@zip $(BUILD_DIR)/$(BIN_NAME).zip $(TARGET_WIN) $(BUILD_DIR)/*.dll
 
 all: linux windows
