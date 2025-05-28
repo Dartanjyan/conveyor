@@ -6,6 +6,10 @@
 
 ConsoleApp::ConsoleApp(std::string name): name(name) {}
 
+void ConsoleApp::setSpaceManager(std::unique_ptr<SpaceManager> space_manager) {
+    this->spaceManager = std::move(space_manager);
+}
+
 int ConsoleApp::Init() {
     std::cout<<"\n\n\nWelcome to my application!\n\nApp name is \""<<name<<"\".\n\n";
     return 0;

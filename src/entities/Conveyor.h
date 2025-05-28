@@ -18,14 +18,18 @@ private:
     Conveyor* next;
     // Map that keeps pointers to objects on the conveyor and their position
     // relatively to the conveyor's position and rotation
+    // TODO: Item* should be std::unique_ptr<Item>
     std::map<Item*, Transform> items;
 public:
     Conveyor(Transform transform, Size size, uint8_t level);
     
-    Transform getTransform() const { return transform; }
     uint8_t getLevel() const { return level; }
     const Conveyor* getNextConveyor() const { return next; }
     std::map<Item*, Transform> getItems() const { return items; }
 
-    void Act();
+    void Act() override;
+    // Try to accept item on relative position relPos
+    // Returns true if the Item is accepted and false if not.
+    // TODO: Item* should be std::unique_ptr<Item>
+    bool AcceptItem(Item* item, const Transform& relPos); 
 };

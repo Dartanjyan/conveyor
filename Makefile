@@ -20,7 +20,7 @@ TARGET_LINUX = $(BUILD_DIR)/$(BIN_NAME)
 TARGET_WIN = $(BUILD_DIR)/$(BIN_NAME).exe
 
 linux: $(BUILD_DIR) $(TARGET_LINUX)
-#	tar -cJvf $(BUILD_DIR)/$(BIN_NAME).tar.xz $(TARGET_LINUX)
+	@echo -e "\n\e[92mTarget $(TARGET_LINUX) built!\e[0m"
 
 windows: $(BUILD_DIR) $(TARGET_WIN)
 	@cp -v 3rdparty/SDL/install/bin/SDL2.dll $(BUILD_DIR)

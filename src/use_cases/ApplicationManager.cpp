@@ -1,6 +1,6 @@
 #include "ApplicationManager.h"
 
-int ApplicationManager::Run(int argc, char** argv, std::unique_ptr<UI> ui) {
+int ApplicationManager::Run(int argc, char** argv, std::unique_ptr<UI> ui, std::unique_ptr<SpaceManager> space_manager) {
     /*
     * Parse cli flags and arguments and run a UI
     * which further decide what to use: GUI or CLI.
@@ -20,6 +20,7 @@ int ApplicationManager::Run(int argc, char** argv, std::unique_ptr<UI> ui) {
         }
     }
     
+    ui->setSpaceManager(std::move(space_manager));
     int result = ui->Run(gui);
     return result;
 }
