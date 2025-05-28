@@ -8,7 +8,7 @@
 
 #define MAX_SCALE 30.0f
 #define MIN_SCALE 5.0f
-#define DEFAULT_SCALE (MAX_SCALE+MIN_SCALE)/3*2
+#define DEFAULT_SCALE (MAX_SCALE+MIN_SCALE)/3*2*0+30
 
 SDLApp::SDLApp(std::string name, int width, int height) : name(name), width(width), height(height), window(nullptr), renderer(nullptr), scale(DEFAULT_SCALE) {}
 
@@ -74,11 +74,11 @@ void drawConveyor(SDL_Renderer* renderer, const Conveyor* conv, float scale) {
         std::map<Item*, Transform> items = conv->getItems();
         for (auto& item : items) {
             SDL_Rect itemRect;
-            itemRect.w = static_cast<int>(2 * scale);
-            itemRect.h = static_cast<int>(2 * scale);
-            itemRect.x = static_cast<int>(item.second.getX() * scale - itemRect.w / 2);
-            itemRect.y = static_cast<int>(item.second.getY() * scale - itemRect.h / 2);
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            itemRect.w = static_cast<int>(item.first->getSize() * scale);
+            itemRect.h = static_cast<int>(item.first->getSize() * scale);
+            itemRect.x = static_cast<int>(item.first->getSize() * item.second.getX() * scale - itemRect.w / 2);
+            itemRect.y = static_cast<int>(item.first->getSize() * item.second.getY() * scale - itemRect.h / 2);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             SDL_RenderFillRect(renderer, &itemRect);
         }
     }

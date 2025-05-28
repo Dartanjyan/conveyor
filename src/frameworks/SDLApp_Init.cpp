@@ -49,7 +49,7 @@ int SDLApp::Init() {
     spaceManager->start();
 
     auto conv = new Conveyor(Transform(0, 0, 0), Size(1, 1), 1);
-    conv->AcceptItem(new Item(Id("item")), Transform(0, 0, 0));
+    conv->AcceptItem(new Item(Id("item")), Transform(0.5f, 0.5f, 0));
     spaceManager->addBuilding(conv);
 
     return 0;
