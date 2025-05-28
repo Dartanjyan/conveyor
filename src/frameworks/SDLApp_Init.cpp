@@ -11,11 +11,14 @@ int SDLApp::Init() {
     window = SDL_CreateWindow(
         name.c_str(),
         0,
-        SDL_WINDOWPOS_CENTERED,                                 width,
-        height,                                                 SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        SDL_WINDOWPOS_CENTERED,
+        width,
+        height,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
     if (window == nullptr) {
-        std::cout << "Couldn't open a window: " << SDL_GetError() << "\n";                                              SDL_Quit();
+        std::cout << "Couldn't open a window: " << SDL_GetError() << "\n";
+        SDL_Quit();
         return -1;
     }
     std::cout << "Trying to run accelerated renderer...\n";
@@ -43,7 +46,7 @@ int SDLApp::Init() {
         std::cout << "\nUsing accelerated (GPU) rendering.\n\n";
     }
     
-    this->spaceManager->start();
+    spaceManager->start();
 
     // auto conv = new Conveyor(Transform(0, 0, 0), Size(1, 1), 1);
     spaceManager->addBuilding(new Conveyor(Transform(0, 0, 0), Size(1, 1), 1));

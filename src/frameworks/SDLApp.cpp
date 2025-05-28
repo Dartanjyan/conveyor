@@ -69,12 +69,24 @@ void drawConveyor(SDL_Renderer* renderer, const Conveyor* conv, float scale) {
         points[3] = points[0]; // Close the triangle
         SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
         SDL_RenderDrawLines(renderer, points, 4);
+        
+        // Draw items as squares
+        std::map<Item*, Transform> items = conv->getItems();
+        for (auto& item : items) {
+            SDL_Rect itemRect;
+            itemRect.w = static_cast<int>(2 * scale);
+            itemRect.h = static_cast<int>(2 * scale);
+            itemRect.x = static_cast<int>(item.second.getX() * scale - itemRect.w / 2);
+            itemRect.y = static_cast<int>(item.second.getY() * scale - itemRect.h / 2);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_RenderFillRect(renderer, &itemRect);
+        }
     }
 }
 
 void SDLApp::render() {
     std::vector<const BaseBuilding*> buildings = this->spaceManager->getBuildings();
-    // std::cout<<"\e[36mSDLApp.cpp\e[0m: size of buildings vector: "<<buildings.size()<<std::endl;
+    //std::cout<<"\e[36mSDLApp.cpp\e[0m: size of buildings vector: "<<buildings.size()<<std::endl;
     for (auto& building : buildings) {
         SDL_Rect buildingRect = BuildingToSDLRect(building);
         SDL_Rect winRect {0, 0, 0, 0};
@@ -82,7 +94,7 @@ void SDLApp::render() {
 
         if(SDL_HasIntersection(&buildingRect, &winRect)) {
             if (building->getId() == Id("conveyor")) {
-                drawConveyor(this->renderer, dynamic_cast<const Conveyor*>(building), scale);
+                drawConveyor(renderer, dynamic_cast<const Conveyor*>(building), scale);
             }
         }
     }

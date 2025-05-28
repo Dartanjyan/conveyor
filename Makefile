@@ -1,5 +1,5 @@
 CXX_LINUX = g++
-CXX_WIN = x86_64-w64-mingw32-g++-posix
+CXX_WIN = x86_64-w64-mingw32-g++
 
 LDFLAGS = -lm
 LDFLAGS_LINUX = $(LDFLAGS) -lSDL2 -L/usr/local/lib
@@ -22,7 +22,7 @@ TARGET_LINUX = $(BUILD_DIR)/$(BIN_NAME)
 TARGET_WIN = $(BUILD_DIR)/$(BIN_NAME).exe
 
 linux: $(BUILD_DIR) $(TARGET_LINUX)
-	@echo -e "\n\e[92mTarget $(TARGET_LINUX) built!\e[0m"
+	@echo -e "\n\e[92mTarget \e[94m$(TARGET_LINUX) \e[92mbuilt!\e[0m"
 
 windows: $(BUILD_DIR) $(TARGET_WIN)
 	@cp -v 3rdparty/SDL/install/bin/SDL2.dll $(BUILD_DIR)
@@ -30,6 +30,7 @@ windows: $(BUILD_DIR) $(TARGET_WIN)
 	#@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libgcc_s_seh-1.dll $(BUILD_DIR)
 	#@cp -v /usr/lib/gcc/x86_64-w64-mingw32/12-win32/libstdc++-6.dll $(BUILD_DIR)
 	@zip $(BUILD_DIR)/$(BIN_NAME).zip $(TARGET_WIN) $(BUILD_DIR)/*.dll
+	@echo -e "\n\e[92mTarget \e[94m$(TARGET_WIN) \e[92mbuilt and packed to \e[34m$(BUILD_DIR)/$(BIN_NAME).zip\e[92m!\e[0m"
 
 all: linux windows
 	
