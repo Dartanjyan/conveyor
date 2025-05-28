@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Space.h"
+#include "Conveyor.h"
 
 Space::Space() {}
 
@@ -24,8 +25,12 @@ void Space::removeBuilding(BaseBuilding* building) {
     }
 }
 
-void Space::addBuilding(BaseBuilding* building) {
+bool Space::addBuilding(BaseBuilding* building) {
     // std::cout<<"Space.cpp: called addBuilding()\n";
+    if (building->getId() == Id("conveyor")) {
+        Conveyor* conv = dynamic_cast<Conveyor*>(building);
+        //TODO update pointers in all other conveyors
+    }
     buildings.push_back(building);
 }
 

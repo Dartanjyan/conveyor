@@ -17,7 +17,7 @@ public:
 
     // std::vector<BaseBuilding*> getBuildings() const { return buildings; }
 
-    void addBuilding(BaseBuilding* building);
+    bool addBuilding(BaseBuilding* building);
     void removeBuilding(BaseBuilding* building);
 
     std::vector<const BaseBuilding*> getBuildings() const;
